@@ -1,0 +1,75 @@
+<?php
+
+        //local
+        $servername="localhost";
+        $username="root";
+        $password="";
+        $dbname="test";
+       
+        $con = mysqli_connect($servername,$username,$password,$dbname) or die ("could not connect data");
+
+//echo "Welcome to the database of the Battery Management System!";
+    //include("./config.php");
+    $data=[];
+   
+
+    if(isset($_GET['listing'])){
+      if($_GET['listing']==1){
+        $sql="SELECT * from `user`";
+      //  $query=mysqli_query( $con, $q) or die(mysqli_error($con));
+       $results = $con ->query($sql);
+       $data=$results ->fetch_all(MYSQLI_ASSOC);
+       // $data=mysqli_fetch_array($query);
+      //  echo $data;
+    }
+    // if($_GET['listing']==2){
+    //     $query=mysqli_query($con,"select `average_reading` from `monitoring_system` ");
+    //     $data=mysqli_fetch_all($query,MYSQLI_ASSOC);
+    // }
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<table class="table container">
+    <link rel="stylesheet" href="style.css">
+    <title>Power Quality Monitoring</title>
+</head>
+<body>
+      <table class="table container">
+        <tr>
+          <th class="table-heading">Output</th>
+          <th class="table-heading">fault</th>
+          <th class="table-heading">E1</th>
+          <th class="table-heading">E2</th>
+          <th class="table-heading">E3</th>
+          <th class="table-heading">E4</th>
+          <th class="table-heading">E5</th>
+          <th class="table-heading">E6</th>
+          <th class="table-heading">E7</th>
+          <th class="table-heading">E8</th>
+          <th class="table-heading">E9</th>
+        </tr>
+        <?php foreach($data as $dataItem) { ?>
+          <tr>
+            <td class="table-item"><?php echo $dataItem["Output"] ?></td>
+            <td class="table-item"><?php echo $dataItem["fault"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E1"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E2"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E3"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E4"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E5"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E6"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E7"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E8"] ?></td>
+            <td class="table-item"><?php echo $dataItem["E9"] ?></td>
+
+          </tr>
+        <?php } ?>
+      </table>
+   
+</body>
+</html>
