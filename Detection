@@ -1,0 +1,58 @@
+conn = database('test','root','');
+curs = exec(conn,'SELECT * FROM user');
+curs = fetch(curs);
+curs.Data
+
+tablename = 'user';
+[C,S] = wavedec2(fault_3phase_2,8,'db8'); %put in the variable used to refer to the signal name as the first input
+[Ea,EDetails] = wenergy2(C,S);
+E1=Ea;
+E2=EDetails(1);
+E3=EDetails(2);
+E4=EDetails(3);
+E5=EDetails(4);
+E6=EDetails(5);
+E7=EDetails(6);
+E8=EDetails(7);
+E9=EDetails(8);
+
+test_input=[Ea,EDetails]
+f=test_input'
+fault_3phase_2;
+%capacitor;
+neural_92;
+g=find(posi==position_final)
+v="Voltage sag";
+h="Harmonics";
+n="Notches";
+t="Transient";
+w="Normal waveform";
+if g==1
+    disp(v)
+    data = table(1,v,E1,E2,E3,E4,E5,E6,E7,E8,E9,'VariableNames',["Output" "fault" "E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9"]);
+    sqlwrite(conn,tablename,data);
+
+elseif g==2
+       disp(h)
+       data = table(2,h,E1,E2,E3,E4,E5,E6,E7,E8,E9,'VariableNames',["Output" "fault" "E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9"]);
+        sqlwrite(conn,tablename,data);
+
+ elseif g==3
+       disp(n)
+       data = table(3,n,E1,E2,E3,E4,E5,E6,E7,E8,E9,'VariableNames',["Output" "fault" "E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9"]);
+       sqlwrite(conn,tablename,data);
+
+
+ elseif g==4
+       disp(t)
+       data = table(4,t,E1,E2,E3,E4,E5,E6,E7,E8,E9,'VariableNames',["Output" "fault" "E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9"]);
+       sqlwrite(conn,tablename,data);
+
+
+ elseif g==5
+       disp(w)
+       data = table(5,w,E1,E2,E3,E4,E5,E6,E7,E8,E9,'VariableNames',["Output" "fault" "E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9"]);
+       sqlwrite(conn,tablename,data);
+
+end
+
